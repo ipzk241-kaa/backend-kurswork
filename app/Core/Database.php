@@ -7,7 +7,7 @@ use PDOException;
 
 class Database {
     protected $pdo;
-
+    private static $instance = null;
     public function __construct() {
         $config = require __DIR__ . '/../../config/database.php';
 
@@ -25,5 +25,13 @@ class Database {
 
     public function getConnection() {
         return $this->pdo;
+    }
+
+        public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
     }
 }
