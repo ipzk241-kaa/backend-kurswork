@@ -54,7 +54,7 @@ class RouteController extends BaseController
         $model = new Route();
         $model->create($data);
 
-        header('Location: /admin-routes');
+        header('Location: /routes/admin');
     }
 
     public function edit($id)
@@ -88,7 +88,7 @@ class RouteController extends BaseController
         $model = new Route();
         $model->update($id, $data);
 
-        header('Location: /admin-routes');
+        header('Location: /routes/admin');
     }
 
     public function delete($id)
@@ -101,6 +101,6 @@ class RouteController extends BaseController
         $model = new Route();
         $model->delete($id);
 
-        header('Location: /admin-routes');
+        header('Location: /routes/admin');
     }
 }

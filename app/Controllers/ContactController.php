@@ -61,6 +61,6 @@ class ContactController extends BaseController
 
         $model = new Contact();
         $model->delete($id);
-        header('Location: /admin/contacts');
+        header('Location: /contacts/admin');
     }
 }
