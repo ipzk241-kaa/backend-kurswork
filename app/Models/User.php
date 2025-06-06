@@ -11,4 +11,10 @@ class User extends Model
         $stmt->execute([$username]);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function create($username, $passwordHash, $role = 'user')
+{
+    $stmt = $this->db->prepare("INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)");
+    $stmt->execute([$username, $passwordHash, $role]);
+}
 }

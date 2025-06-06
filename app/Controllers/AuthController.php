@@ -38,4 +38,34 @@ class AuthController extends BaseController
         session_destroy();
         header('Location: /login');
     }
+
+    public function register()
+{
+    $this->view('auth/register', ['title' => 'Реєстрація']);
+}
+
+public function handleRegister()
+{
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+    $role = 'user';
+
+    if (strlen($username) < 3 || strlen($password) < 4) {
+        $this->view('auth/register', ['title' => 'Реєстрація', 'error' => 'Некоректні дані']);
+        return;
+    }
+
+    $userModel = new \App\Models\User();
+    $existing = $userModel->findByUsername($username);
+    if ($existing) {
+        $this->view('auth/register', ['title' => 'Реєстрація', 'error' => 'Користувач вже існує']);
+        return;
+    }
+
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    $userModel->create($username, $passwordHash, $role);
+
+    header('Location: /login');
+}
+
 }

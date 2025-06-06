@@ -8,6 +8,8 @@ $router->add('', 'HomeController', 'index');
 $router->add('routes', 'RouteController', 'index');
 $router->add('login', 'AuthController', 'login');
 $router->add('handle-login', 'AuthController', 'handleLogin');
+$router->add('register', 'AuthController', 'register');
+$router->add('handle-register', 'AuthController', 'handleRegister');
 $router->add('logout', 'AuthController', 'logout');
 
 $uri = $_SERVER['REQUEST_URI'];

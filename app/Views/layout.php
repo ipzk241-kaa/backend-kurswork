@@ -5,6 +5,30 @@
     <title><?= $title ?? 'TravelGuide' ?></title>
 </head>
 <body>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+
+<nav>
+    <?php if (!empty($_SESSION['user'])): ?>
+        <p>Привіт, <?= htmlspecialchars($_SESSION['user']['username']) ?> |
+            <a href="/logout">Вийти</a>
+        </p>
+    <?php else: ?>
+        <a href="/login">Увійти</a> |
+        <a href="/register">Реєстрація</a>
+    <?php endif; ?>
+</nav>
+<hr>
     <?= $content ?>
+    <?php
+if (!empty($_SESSION['user'])) {
+    echo "Сесія активна. Ви увійшли як: " . $_SESSION['user']['username'];
+} else {
+    echo "Сесія відсутня. Ви не увійшли.";
+}
+?>
 </body>
 </html>
