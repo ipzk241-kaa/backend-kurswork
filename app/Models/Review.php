@@ -24,16 +24,21 @@ class Review extends Model
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function create($userName, $text)
+    public function create($userName, $text, $image = null)
     {
-        $stmt = $this->db->prepare("INSERT INTO reviews (user_name, text) VALUES (?, ?)");
-        $stmt->execute([$userName, $text]);
+        $stmt = $this->db->prepare("INSERT INTO reviews (user_name, text, image) VALUES (?, ?, ?)");
+        $stmt->execute([$userName, $text, $image]);
     }
 
-    public function update($id, $userName, $text)
+    public function update($id, $userName, $text, $image = null)
     {
-        $stmt = $this->db->prepare("UPDATE reviews SET user_name = ?, text = ? WHERE id = ?");
-        $stmt->execute([$userName, $text, $id]);
+        if ($image) {
+            $stmt = $this->db->prepare("UPDATE reviews SET user_name = ?, text = ?, image = ? WHERE id = ?");
+            $stmt->execute([$userName, $text, $image, $id]);
+        } else {
+            $stmt = $this->db->prepare("UPDATE reviews SET user_name = ?, text = ? WHERE id = ?");
+            $stmt->execute([$userName, $text, $id]);
+        }
     }
 
     public function delete($id)

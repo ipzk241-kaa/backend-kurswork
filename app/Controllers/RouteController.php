@@ -37,25 +37,25 @@ class RouteController extends BaseController
     }
 
     public function store()
-{
-    if (!Auth::isAdmin()) {
-        http_response_code(403);
-        exit('Доступ заборонено');
+    {
+        if (!Auth::isAdmin()) {
+            http_response_code(403);
+            exit('Доступ заборонено');
+        }
+
+        $data = [
+            'title' => $_POST['title'] ?? '',
+            'description' => $_POST['description'] ?? '',
+            'image' => $_POST['image'] ?? '',
+            'duration' => $_POST['duration'] ?? '',
+            'price' => $_POST['price'] ?? 0,
+        ];
+
+        $model = new Route();
+        $model->create($data);
+
+        header('Location: /admin-routes');
     }
-
-    $data = [
-        'title' => $_POST['title'] ?? '',
-        'description' => $_POST['description'] ?? '',
-        'image' => $_POST['image'] ?? '',
-        'duration' => $_POST['duration'] ?? '',
-        'price' => $_POST['price'] ?? 0,
-    ];
-
-    $model = new Route();
-    $model->create($data);
-
-    header('Location: /admin-routes');
-}
 
     public function edit($id)
     {
@@ -71,25 +71,25 @@ class RouteController extends BaseController
     }
 
     public function update($id)
-{
-    if (!Auth::isAdmin()) {
-        http_response_code(403);
-        exit('Доступ заборонено');
+    {
+        if (!Auth::isAdmin()) {
+            http_response_code(403);
+            exit('Доступ заборонено');
+        }
+
+        $data = [
+            'title' => $_POST['title'] ?? '',
+            'description' => $_POST['description'] ?? '',
+            'image' => $_POST['image'] ?? '',
+            'duration' => $_POST['duration'] ?? '',
+            'price' => $_POST['price'] ?? 0,
+        ];
+
+        $model = new Route();
+        $model->update($id, $data);
+
+        header('Location: /admin-routes');
     }
-
-    $data = [
-        'title' => $_POST['title'] ?? '',
-        'description' => $_POST['description'] ?? '',
-        'image' => $_POST['image'] ?? '',
-        'duration' => $_POST['duration'] ?? '',
-        'price' => $_POST['price'] ?? 0,
-    ];
-
-    $model = new Route();
-    $model->update($id, $data);
-
-    header('Location: /admin-routes');
-}
 
     public function delete($id)
     {
