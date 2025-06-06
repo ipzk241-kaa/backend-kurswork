@@ -7,30 +7,34 @@ use App\Models\Route;
 
 class RouteController extends BaseController
 {
+    private function clearRouteCaches(){
+        $cache = new \App\Core\Cache();
+        $cache->delete('routes_index_page');
+        $cache->delete('routes_admin_page');
+    }
+
     public function index()
     {
         $model = new Route();
         $routes = $model->getAll();
-        $this->view('routes/index', ['title' => 'Маршрути', 'routes' => $routes]);
+        $this->view('routes/index', ['title' => 'Маршрути', 'routes' => $routes], 'routes_index_page');
     }
 
     public function admin()
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $model = new Route();
         $routes = $model->getAll();
-        $this->view('routes/admin', ['title' => 'Адмінка маршрутів', 'routes' => $routes]);
+        $this->view('routes/admin', ['title' => 'Адмінка маршрутів', 'routes' => $routes], 'routes_admin_page');
     }
 
     public function create()
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $this->view('routes/create', ['title' => 'Новий маршрут']);
@@ -39,8 +43,7 @@ class RouteController extends BaseController
     public function store()
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $data = [
@@ -53,15 +56,14 @@ class RouteController extends BaseController
 
         $model = new Route();
         $model->create($data);
-
+        $this->clearRouteCaches();
         header('Location: /routes/admin');
     }
 
     public function edit($id)
-    {
+    {   
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $model = new Route();
@@ -73,8 +75,7 @@ class RouteController extends BaseController
     public function update($id)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $data = [
@@ -87,20 +88,19 @@ class RouteController extends BaseController
 
         $model = new Route();
         $model->update($id, $data);
-
+        $this->clearRouteCaches();
         header('Location: /routes/admin');
     }
 
     public function delete($id)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+        return $this->forbidden();
         }
 
         $model = new Route();
         $model->delete($id);
-
+        $this->clearRouteCaches();
         header('Location: /routes/admin');
     }
 }

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Core\Router;
@@ -55,4 +56,11 @@ $router->add('contacts/delete/{id}', 'ContactController', 'delete');
 
 
 $uri = $_SERVER['REQUEST_URI'];
-$router->dispatch($uri);
+try {
+    $router->dispatch($uri);
+} catch (Throwable $e) {
+    http_response_code(500);
+    require_once __DIR__ . '/../app/Views/errors/500.php';
+}
+
+ob_end_flush();

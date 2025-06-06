@@ -32,6 +32,6 @@ class Router
     }
 
     http_response_code(404);
-    echo "404 - Сторінку не знайдено";
+    require_once __DIR__ . '/../Views/errors/404.php';
 }
 }

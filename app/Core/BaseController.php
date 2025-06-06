@@ -3,18 +3,36 @@ namespace App\Core;
 
 class BaseController
 {
-    protected function view($view, $data = [])
+protected function view($view, $data = [], $cacheKey = null)
     {
         extract($data);
+
+        $cache = new Cache();
+
+        if ($cacheKey && $cached = $cache->get($cacheKey)) {
+            echo $cached;
+            return;
+        }
+
         ob_start();
-        require_once __DIR__ . "/../Views/{$view}.php";
+        require_once __DIR__ . '/../Views/' . $view . '.php';
         $content = ob_get_clean();
-        require_once __DIR__ . "/../Views/layout.php";
+
+        if ($cacheKey) {
+            $cache->set($cacheKey, $content);
+        }
+
+        require_once __DIR__ . '/../Views/layout.php';
     }
     protected function json($data)
     {
         header('Content-Type: application/json');
         echo json_encode($data);
         exit;
+    }
+    protected function forbidden()
+    {
+        $this->view('errors/403', ['title' => 'Доступ заборонено']);
+        http_response_code(403);
     }
 }

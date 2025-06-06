@@ -7,11 +7,16 @@ use App\Models\News;
 
 class NewsController extends BaseController
 {
+    private function clearNewsCaches()
+    {
+        $cache = new \App\Core\Cache();
+        $cache->delete('news_index_page');
+    }
     public function index()
     {
         $model = new News();
         $newsList = $model->getAll();
-        $this->view('news/index', ['title' => 'Новини', 'newsList' => $newsList]);
+        $this->view('news/index', ['title' => 'Новини', 'newsList' => $newsList], 'news_index_page');
     }
 
     public function show($id)
@@ -25,8 +30,7 @@ class NewsController extends BaseController
     public function create()
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $this->view('news/create', ['title' => 'Додати новину']);
@@ -71,14 +75,14 @@ class NewsController extends BaseController
                 }
             }
         }
+        $this->clearNewsCaches();
         header('Location: /news');
     }
 
     public function edit($id)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $model = new News();
@@ -90,8 +94,7 @@ class NewsController extends BaseController
     public function update($id)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $title = $_POST['title'] ?? '';
@@ -111,31 +114,31 @@ class NewsController extends BaseController
                 }
             }
         }
-
+        $this->clearNewsCaches();
         header('Location: /news');
     }
 
     public function delete($id)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $model = new News();
         $model->delete($id);
+        $this->clearNewsCaches();
         header('Location: /news');
     }
 
     public function deleteImage($imageId)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $model = new News();
         $model->deleteImage($imageId);
+        $this->clearNewsCaches();
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 }

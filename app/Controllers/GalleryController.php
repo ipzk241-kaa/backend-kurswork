@@ -7,38 +7,43 @@ use App\Core\Auth;
 
 class GalleryController extends BaseController
 {
+    private function clearGalleryCaches()
+    {
+        $cache = new \App\Core\Cache();
+        $cache->delete('gallery_index_page');
+        $cache->delete('gallary_admin_page');
+    }
     public function index()
     {
         $model = new Gallery();
         $images = $model->getAll();
-        $this->view('gallery/index', ['title' => 'Галерея', 'images' => $images]);
+        $this->view('gallery/index', ['title' => 'Галерея', 'images' => $images], 'gallery_index_page');
     }
     public function admin()
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit('Доступ заборонено');
+            return $this->forbidden();
         }
 
         $model = new Gallery();
         $images = $model->getAll();
-        $this->view('gallery/admin', ['title' => 'Адмінка галереї', 'images' => $images]);
+        $this->view('gallery/admin', ['title' => 'Адмінка галереї', 'images' => $images], 'gallery_admin_page');
     }
     public function create()
     {
         if (!Auth::isAdmin()) {
-        http_response_code(403);
-        exit("Доступ заборонено");
-    }
+            return $this->forbidden();
+        }
+
         $this->view('gallery/create', ['title' => 'Додати зображення']);
     }
 
     public function store()
     {
         if (!Auth::isAdmin()) {
-        http_response_code(403);
-        exit("Доступ заборонено");
-    }
+            return $this->forbidden();
+        }
+
         if (!empty($_POST['title'])) {
             $title = $_POST['title'];
             $imagePath = '';
@@ -71,15 +76,14 @@ class GalleryController extends BaseController
                 exit;
             }
         }
-
+        $this->clearGalleryCaches();
         $this->view('gallery/create', ['title' => 'Додати зображення', 'error' => 'Помилка під час завантаження']);
         header("Location: /admin-gallery");
     }
     public function edit($id)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            exit("Доступ заборонено");
+            return $this->forbidden();
         }
 
         $model = new Gallery();
@@ -89,8 +93,7 @@ class GalleryController extends BaseController
 
     public function update($id){
     if (!Auth::isAdmin()) {
-        http_response_code(403);
-        exit("Доступ заборонено");
+        return $this->forbidden();
     }
 
     $model = new Gallery();
@@ -125,22 +128,23 @@ class GalleryController extends BaseController
     }
 
     $model->update($id, $title, $imagePath);
+    $this->clearGalleryCaches();
     header("Location: /admin-gallery");
 }
     public function delete($id)
-{
-    if (!Auth::isAdmin()) {
-        http_response_code(403);
-        exit("Доступ заборонено");
-    }
+    {
+        if (!Auth::isAdmin()) {
+            return $this->forbidden();
+        }
 
-    $model = new Gallery();
-    $item = $model->find($id);
-    if ($item && file_exists('public/assets/img/' . $item['image_path'])) {
-        unlink('public/assets/img/' . $item['image_path']);
-    }
+        $model = new Gallery();
+        $item = $model->find($id);
+        if ($item && file_exists('public/assets/img/' . $item['image_path'])) {
+            unlink('public/assets/img/' . $item['image_path']);
+        }
 
-    $model->delete($id);
-    header('Location: /admin-gallery');
-}
+        $model->delete($id);
+        $this->clearGalleryCaches();
+        header('Location: /admin-gallery');
+    }
 }

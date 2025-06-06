@@ -54,7 +54,9 @@ class ReviewController extends BaseController
 
     public function approve($id)
     {
-        if (!Auth::isAdmin()) exit('403');
+        if (!Auth::isAdmin()) {
+            return $this->forbidden();
+        }
 
         $model = new Review();
         $model->approve($id);
@@ -63,7 +65,9 @@ class ReviewController extends BaseController
 
     public function edit($id)
     {
-        if (!Auth::isAdmin()) exit('403');
+        if (!Auth::isAdmin()) {
+            return $this->forbidden();
+        }
 
         $model = new Review();
         $review = $model->find($id);
@@ -73,7 +77,9 @@ class ReviewController extends BaseController
 
     public function update($id)
     {
-        if (!Auth::isAdmin()) exit('403');
+        if (!Auth::isAdmin()) {
+            return $this->forbidden();
+        }
 
         $image = isset($_FILES['image']) ? $this->handleImageUpload($_FILES['image']) : null;
         $model = new Review();
@@ -84,7 +90,9 @@ class ReviewController extends BaseController
 
     public function delete($id)
     {
-        if (!Auth::isAdmin()) exit('403');
+        if (!Auth::isAdmin()) {
+            return $this->forbidden();
+        }
 
         $model = new Review();
         $model->delete($id);

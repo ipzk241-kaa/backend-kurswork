@@ -35,9 +35,7 @@ class ContactController extends BaseController
     public function index()
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            echo "Доступ заборонено";
-            return;
+            return $this->forbidden();
         }
 
         $model = new Contact();
@@ -48,9 +46,7 @@ class ContactController extends BaseController
     public function delete($id)
     {
         if (!Auth::isAdmin()) {
-            http_response_code(403);
-            echo "Доступ заборонено";
-            return;
+            return $this->forbidden();
         }
 
         $model = new Contact();
