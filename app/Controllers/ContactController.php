@@ -19,25 +19,19 @@ class ContactController extends BaseController
         $message = $_POST['message'] ?? '';
 
         if (strlen($name) < 2 || !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($message) < 5) {
-            $this->view('contacts/form', [
-                'title' => 'Зворотній зв’язок',
-                'error' => 'Некоректно заповнено форму',
-            ]);
+            $this->json(['error' => 'Некоректно заповнено форму']);
             return;
         }
 
         $model = new Contact();
         $model->create($name, $email, $message);
-
-        $adminEmail = "ipzk241_kaa@student.ztu.edu.ua";
+        $this->json(['success' => 'Повідомлення надіслано!']);
+     /*$adminEmail = "ipzk241_kaa@student.ztu.edu.ua";
         $subject = "Нове повідомлення з сайту";
         $body = "Ім’я: $name\nEmail: $email\n\nПовідомлення:\n$message";
         $headers = "From: $email\r\nReply-To: $email";
-
-        mail($adminEmail, $subject, $body, $headers);
-        $this->view('contacts/form', ['title' => 'Зворотній зв’язок', 'success' => 'Повідомлення надіслано!']);
+        mail($adminEmail, $subject, $body, $headers);*/
     }
-
     public function index()
     {
         if (!Auth::isAdmin()) {

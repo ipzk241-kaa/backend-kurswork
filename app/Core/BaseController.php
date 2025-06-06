@@ -9,6 +9,12 @@ class BaseController
         ob_start();
         require_once __DIR__ . "/../Views/{$view}.php";
         $content = ob_get_clean();
-        require_once __DIR__ . "/../Views/layout.php"; // або вивід без layout
+        require_once __DIR__ . "/../Views/layout.php";
+    }
+    protected function json($data)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
     }
 }
