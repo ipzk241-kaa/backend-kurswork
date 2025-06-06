@@ -38,6 +38,15 @@ $router->add('reviews/update/{id}', 'ReviewController', 'update');
 $router->add('reviews/delete/{id}', 'ReviewController', 'delete');
 $router->add('reviews/approve/{id}', 'ReviewController', 'approve');
 
+$router->add('news', 'NewsController', 'index');
+$router->add('news/show/{id}', 'NewsController', 'show');
+$router->add('news/create', 'NewsController', 'create');
+$router->add('news/store', 'NewsController', 'store');
+$router->add('news/edit/{id}', 'NewsController', 'edit');
+$router->add('news/update/{id}', 'NewsController', 'update');
+$router->add('news/delete/{id}', 'NewsController', 'delete');
+$router->add('news/delete-image/{id}', 'NewsController', 'deleteImage');
+
 
 $uri = $_SERVER['REQUEST_URI'];
 $router->dispatch($uri);

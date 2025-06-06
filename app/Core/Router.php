@@ -26,7 +26,7 @@ class Router
             $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
 
             if (method_exists($controller, $method)) {
-                return call_user_func_array([$controller, $method], $params);
+                return call_user_func_array([$controller, $method], array_values($params));
             }
         }
     }

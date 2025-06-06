@@ -5,13 +5,13 @@ class Auth
 {
     public static function check()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {session_start();}
         return isset($_SESSION['user']);
     }
 
     public static function user()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {session_start();}
         return $_SESSION['user'] ?? null;
     }
 
