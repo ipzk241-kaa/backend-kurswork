@@ -47,6 +47,11 @@ $router->add('news/update/{id}', 'NewsController', 'update');
 $router->add('news/delete/{id}', 'NewsController', 'delete');
 $router->add('news/delete-image/{id}', 'NewsController', 'deleteImage');
 
+$router->add('contacts', 'ContactController', 'form');
+$router->add('send-contact', 'ContactController', 'send');
+$router->add('contacts/admin', 'ContactController', 'index');
+$router->add('contacts/delete/{id}', 'ContactController', 'delete');
+
 
 $uri = $_SERVER['REQUEST_URI'];
 $router->dispatch($uri);
