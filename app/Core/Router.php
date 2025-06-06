@@ -11,8 +11,8 @@ class Router
     }
 
     public function dispatch($uri)
-    {
-        $uri = parse_url($uri, PHP_URL_PATH);
+{
+    $uri = parse_url($uri, PHP_URL_PATH);
     $uri = trim($uri, '/');
 
     foreach ($this->routes as $route => $info) {
@@ -23,16 +23,15 @@ class Router
             $controllerName = "\\App\\Controllers\\" . $info['controller'];
             $method = $info['method'];
             $controller = new $controllerName();
-
             $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
 
             if (method_exists($controller, $method)) {
                 return call_user_func_array([$controller, $method], $params);
             }
         }
-
-        http_response_code(404);
-        echo "404 - Сторінку не знайдено";
     }
+
+    http_response_code(404);
+    echo "404 - Сторінку не знайдено";
 }
 }

@@ -23,12 +23,5 @@ if (session_status() === PHP_SESSION_NONE) {
 </nav>
 <hr>
     <?= $content ?>
-    <?php
-if (!empty($_SESSION['user'])) {
-    echo "Сесія активна. Ви увійшли як: " . $_SESSION['user']['username'];
-} else {
-    echo "Сесія відсутня. Ви не увійшли.";
-}
-?>
 </body>
 </html>
