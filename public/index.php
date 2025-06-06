@@ -31,6 +31,7 @@ $router->add('gallery/delete/{id}', 'GalleryController', 'delete');
 
 $router->add('reviews', 'ReviewController', 'index');
 $router->add('reviews/create', 'ReviewController', 'create');
+$router->add('/reviews/submit', 'ReviewController', 'submit');
 $router->add('reviews/store', 'ReviewController', 'store');
 $router->add('reviews/admin', 'ReviewController', 'admin');
 $router->add('reviews/edit/{id}', 'ReviewController', 'edit');

@@ -20,18 +20,23 @@ class ReviewController extends BaseController
         $this->view('reviews/create', ['title' => 'Залишити відгук']);
     }
 
-    public function store()
+    public function submit()
     {
+        header('Content-Type: application/json');
+
         $userName = $_POST['user_name'] ?? '';
         $text = $_POST['text'] ?? '';
         $image = isset($_FILES['image']) ? $this->handleImageUpload($_FILES['image']) : null;
-        
-        if ($userName && $text) {
-            $model = new Review();
-            $model->create($userName, $text, $image);
+
+        if (!$userName || !$text) {
+            echo json_encode(['success' => false, 'message' => 'Усі поля обов’язкові.']);
+            return;
         }
 
-        header('Location: /reviews');
+        $model = new Review();
+        $model->create($userName, $text, $image);
+
+        echo json_encode(['success' => true, 'message' => 'Відгук надіслано. Очікує модерації.']);
     }
 
     // ========== Адмін ==========
