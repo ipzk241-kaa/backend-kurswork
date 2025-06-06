@@ -13,13 +13,16 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <nav>
     <?php if (!empty($_SESSION['user'])): ?>
-        <p>Привіт, <?= htmlspecialchars($_SESSION['user']['username']) ?> |
-            <a href="/logout">Вийти</a>
-        </p>
-    <?php else: ?>
-        <a href="/login">Увійти</a> |
-        <a href="/register">Реєстрація</a>
-    <?php endif; ?>
+    <p>Привіт, <?= htmlspecialchars($_SESSION['user']['username']) ?> |
+        <?php if ($_SESSION['user']['role'] === 'admin'): ?>
+            <a href="/admin">Адмін-панель</a> |
+        <?php endif; ?>
+        <a href="/logout">Вийти</a>
+    </p>
+<?php else: ?>
+    <a href="/login">Увійти</a> |
+    <a href="/register">Реєстрація</a>
+<?php endif; ?>
 </nav>
 <hr>
     <?= $content ?>

@@ -1,0 +1,146 @@
+<?php
+namespace App\Controllers;
+
+use App\Core\BaseController;
+use App\Models\Gallery;
+use App\Core\Auth;
+
+class GalleryController extends BaseController
+{
+    public function index()
+    {
+        $model = new Gallery();
+        $images = $model->getAll();
+        $this->view('gallery/index', ['title' => 'Галерея', 'images' => $images]);
+    }
+    public function admin()
+    {
+        if (!Auth::isAdmin()) {
+            http_response_code(403);
+            exit('Доступ заборонено');
+        }
+
+        $model = new Gallery();
+        $images = $model->getAll();
+        $this->view('gallery/admin', ['title' => 'Адмінка галереї', 'images' => $images]);
+    }
+    public function create()
+    {
+        if (!Auth::isAdmin()) {
+        http_response_code(403);
+        exit("Доступ заборонено");
+    }
+        $this->view('gallery/create', ['title' => 'Додати зображення']);
+    }
+
+    public function store()
+    {
+        if (!Auth::isAdmin()) {
+        http_response_code(403);
+        exit("Доступ заборонено");
+    }
+        if (!empty($_POST['title'])) {
+            $title = $_POST['title'];
+            $imagePath = '';
+
+            if (!empty($_POST['image_url'])) {
+                $url = $_POST['image_url'];
+                $ext = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION);
+                $uniqueName = uniqid('img_') . '.' . $ext;
+                $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
+
+                if (@copy($url, $targetPath)) {
+                    $imagePath = $uniqueName;
+                }
+            }
+
+            if (!empty($_FILES['image_file']['name'])) {
+                $ext = pathinfo($_FILES['image_file']['name'], PATHINFO_EXTENSION);
+                $uniqueName = uniqid('img_') . '.' . $ext;
+                $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
+
+                if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetPath)) {
+                    $imagePath = $uniqueName;
+                }
+            }
+
+            if ($imagePath) {
+                $model = new Gallery();
+                $model->create($title, $imagePath);
+                header('Location: /gallery');
+                exit;
+            }
+        }
+
+        $this->view('gallery/create', ['title' => 'Додати зображення', 'error' => 'Помилка під час завантаження']);
+        header("Location: /admin-gallery");
+    }
+    public function edit($id)
+    {
+        if (!Auth::isAdmin()) {
+            http_response_code(403);
+            exit("Доступ заборонено");
+        }
+
+        $model = new Gallery();
+        $item = $model->find($id);
+        $this->view('gallery/edit', ['title' => 'Редагування зображення', 'item' => $item]);
+    }
+
+    public function update($id){
+    if (!Auth::isAdmin()) {
+        http_response_code(403);
+        exit("Доступ заборонено");
+    }
+
+    $model = new Gallery();
+    $item = $model->find($id);
+    $title = $_POST['title'] ?? $item['title'];
+    $imagePath = $item['image_path'];
+
+    if (!empty($_POST['image_url'])) {
+        $ext = pathinfo(parse_url($_POST['image_url'], PHP_URL_PATH), PATHINFO_EXTENSION);
+        $uniqueName = uniqid('img_') . '.' . $ext;
+        $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
+
+        if (@copy($_POST['image_url'], $targetPath)) {
+            if (file_exists("public/assets/img/" . $imagePath)) {
+                unlink("public/assets/img/" . $imagePath);
+            }
+            $imagePath = $uniqueName;
+        }
+    }
+
+    if (!empty($_FILES['image_file']['name'])) {
+        $ext = pathinfo($_FILES['image_file']['name'], PATHINFO_EXTENSION);
+        $uniqueName = uniqid('img_') . '.' . $ext;
+        $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
+
+        if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetPath)) {
+            if (file_exists("public/assets/img/" . $imagePath)) {
+                unlink("public/assets/img/" . $imagePath);
+            }
+            $imagePath = $uniqueName;
+        }
+    }
+
+    $model->update($id, $title, $imagePath);
+    header("Location: /admin-gallery");
+}
+    public function delete($id)
+{
+    if (!Auth::isAdmin()) {
+        http_response_code(403);
+        exit("Доступ заборонено");
+    }
+
+    $model = new Gallery();
+    $item = $model->find($id);
+    if ($item && file_exists('public/assets/img/' . $item['image_path'])) {
+        unlink('public/assets/img/' . $item['image_path']);
+    }
+
+    $model->delete($id);
+    header('Location: /admin-gallery');
+}
+}
