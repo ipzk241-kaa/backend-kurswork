@@ -14,5 +14,5 @@
     <label>Або вставте URL зображення:</label>
     <input type="text" name="image_url" placeholder="https://...">
 
-    <button type="submit" class="btn">Додати</button>
+    <button type="submit" class="btn-primary">Додати</button>
 </form>

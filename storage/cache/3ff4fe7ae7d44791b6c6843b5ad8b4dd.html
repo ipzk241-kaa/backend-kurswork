@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адмінка маршрутів</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/theme-light.css" id="theme-link">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">
+            <a href="/">TravelGuide</a>
+        </div>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Головна</a></li>
+                <li><a href="/routes">Маршрути</a></li>
+                <li><a href="/gallery">Галерея</a></li>
+                <li><a href="/news">Новини</a></li>
+                <li><a href="/about">Про нас</a></li>
+                <li><a href="/reviews">Відгуки</a></li>
+                <li><a href="/contacts">Контакти</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <button id="theme-toggle" aria-label="Змінити тему">🌙</button>
+
+                            <span class="user-info">
+                    Привіт, Artem                </span>
+                                    <a href="/admin" class="btn-link">Адмін-панель</a>
+                                <a href="/logout" class="btn-link">Вийти</a>
+                    </div>
+    </div>
+</header>
+
+<main class="container">
+    <h2>Адмінка маршрутів</h2>
+<a href="/routes/create" class="btn-primary">+ Додати маршрут</a>
+
+<div class="table-wrapper">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Ціна</th>
+                <th>Тривалість</th>
+                <th>Зображення</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+                            <tr>
+                    <td>Теплі Карпати</td>
+                    <td>4000.00 грн</td>
+                    <td>2 дні</td>
+                    <td>
+                                                    <img src="/assets/routes/img_6843f517ddf19.jpg" width="120">
+                                            </td>
+                    <td>
+                        <a href="/routes/edit/6">✏️</a>
+                        <a href="/routes/delete/6" onclick="return confirm('Видалити?')">🗑️</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td>Краса Житомиру</td>
+                    <td>3000.00 грн</td>
+                    <td>5 годин</td>
+                    <td>
+                                                    <img src="/assets/routes/img_6843f8b2ee67b.jpg" width="120">
+                                            </td>
+                    <td>
+                        <a href="/routes/edit/4">✏️</a>
+                        <a href="/routes/delete/4" onclick="return confirm('Видалити?')">🗑️</a>
+                    </td>
+                </tr>
+                            <tr>
+                    <td>Київ – місто контрастів</td>
+                    <td>4000.00 грн</td>
+                    <td>6 годин</td>
+                    <td>
+                                                    <img src="/assets/routes/img_6843f8b672542.jpg" width="120">
+                                            </td>
+                    <td>
+                        <a href="/routes/edit/3">✏️</a>
+                        <a href="/routes/delete/3" onclick="return confirm('Видалити?')">🗑️</a>
+                    </td>
+                </tr>
+                    </tbody>
+    </table>
+</div>
+</main>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeLink = document.getElementById('theme-link');
+
+    let currentTheme = localStorage.getItem('theme') || 'light';
+    themeLink.href = `/assets/css/theme-${currentTheme}.css`;
+    themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+
+    themeToggle.addEventListener('click', () => {
+        if (currentTheme === 'light') {
+            currentTheme = 'dark';
+        } else {
+            currentTheme = 'light';
+        }
+        themeLink.href = `/assets/css/theme-${currentTheme}.css`;
+        themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+        localStorage.setItem('theme', currentTheme);
+    });
+</script>
+<footer class="site-footer">
+    <p>&copy; 2025 TravelGuide. Всі права захищено, а може і нє :D.</p>
+</footer>
+</body>
+</html>

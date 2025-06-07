@@ -13,5 +13,5 @@
     <label>Або новий URL зображення:</label>
     <input type="text" name="image_url">
 
-    <button type="submit" class="btn">Оновити</button>
+    <button type="submit" class="btn-primary">Оновити</button>
 </form>
