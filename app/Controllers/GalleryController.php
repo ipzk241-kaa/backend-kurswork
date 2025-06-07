@@ -78,7 +78,7 @@ class GalleryController extends BaseController
         }
         $this->clearGalleryCaches();
         $this->view('gallery/create', ['title' => 'Додати зображення', 'error' => 'Помилка під час завантаження']);
-        header("Location: /admin-gallery");
+        header("Location: /gallery/admin");
     }
     public function edit($id)
     {
@@ -129,7 +129,7 @@ class GalleryController extends BaseController
 
     $model->update($id, $title, $imagePath);
     $this->clearGalleryCaches();
-    header("Location: /admin-gallery");
+    header("Location: /gallery/admin");
 }
     public function delete($id)
     {
@@ -145,6 +145,6 @@ class GalleryController extends BaseController
 
         $model->delete($id);
         $this->clearGalleryCaches();
-        header('Location: /admin-gallery');
+        header('Location: /gallery/admin');
     }
 }
