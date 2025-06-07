@@ -21,4 +21,10 @@
   --text-secondary: #a0a0a0;
   --accent: #3399ff;
   --accent-hover: #66b2ff;
+  --border-color: #444;
+  --placeholder-bg: #444;
+  --placeholder-text: #bbb;
+  --btn-bg: #3399ff;
+  --btn-text: #fff;
+  --btn-hover-bg: #2277ee;
 }

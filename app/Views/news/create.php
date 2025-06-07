@@ -1,5 +1,6 @@
 <h1>Додати новину</h1>
-<form action="/news/store" method="POST" enctype="multipart/form-data">
+
+<form action="/news/store" method="POST" enctype="multipart/form-data" class="news-form">
     <label>Заголовок:</label><br>
     <input type="text" name="title" required><br><br>
 
@@ -11,7 +12,9 @@
 
     <label>Зображення (можна декілька):</label><br>
     <input type="file" name="images[]" multiple><br><br>
-    <label>Або додати зображення за посиланням (можна декілька, через кому):</label><br>
+
+    <label>Або додати зображення за посиланням (через кому):</label><br>
     <input type="text" name="image_links"><br><br>
-    <button type="submit">Зберегти</button>
+
+    <button type="submit" class="btn-submit">Зберегти</button>
 </form>

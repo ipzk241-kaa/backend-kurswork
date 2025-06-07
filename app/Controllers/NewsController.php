@@ -16,6 +16,9 @@ class NewsController extends BaseController
     {
         $model = new News();
         $newsList = $model->getAll();
+        foreach ($newsList as &$news) {
+        $news['images'] = $model->getImages($news['id']);
+    }
         $this->view('news/index', ['title' => 'Новини', 'newsList' => $newsList], 'news_index_page');
     }
 
