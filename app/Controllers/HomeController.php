@@ -9,4 +9,8 @@ class HomeController extends BaseController
     {
         $this->view('home/index', ['title' => 'Головна сторінка']);
     }
+    public function about()
+    {
+         $this->view('home/about', ['title' => 'Про нас']);
+    }
 }

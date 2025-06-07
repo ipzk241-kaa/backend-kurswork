@@ -7,6 +7,7 @@ use App\Core\Router;
 $router = new Router();
 $router->add('', 'HomeController', 'index');
 $router->add('admin', 'AdminController', 'index');
+$router->add('about','HomeController','about');
 
 $router->add('login', 'AuthController', 'login');
 $router->add('handle-login', 'AuthController', 'handleLogin');

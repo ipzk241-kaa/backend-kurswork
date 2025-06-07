@@ -537,3 +537,33 @@ hr {
 .delete-link:hover {
     text-decoration: underline;
 }
+
+/* === Сторінка Про нас === */
+.about-section h1,
+.about-section h2 {
+  color: var(--text-color);
+  margin-top: 1.5rem;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.about-section ul {
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+.about-section ul li {
+  margin: 0.5rem 0;
+}
+
+.about-section blockquote {
+  margin: 2rem 0;
+  padding-left: 1rem;
+  border-left: 4px solid var(--nav-link-hover);
+  font-style: italic;
+  color: var(--text-color);
+}
