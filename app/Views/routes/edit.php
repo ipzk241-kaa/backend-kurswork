@@ -1,14 +1,15 @@
 <h2><?= $title ?></h2>
 
-<form method="POST" action="<?= isset($route) ? '/routes/update/' . $route['id'] : '/routes/store' ?>">
+<form method="POST" action="<?= isset($route) ? '/routes/update/' . $route['id'] : '/routes/store' ?>" enctype="multipart/form-data">
     <label>Назва:</label><br>
     <input type="text" name="title" value="<?= $route['title'] ?? '' ?>" required><br><br>
 
     <label>Опис:</label><br>
     <textarea name="description" required><?= $route['description'] ?? '' ?></textarea><br><br>
 
-    <label>Зображення (URL):</label><br>
-    <input type="text" name="image" value="<?= $route['image'] ?? '' ?>"><br><br>
+    <label>Зображення (URL або файл):</label><br>
+    <input type="text" name="image_url" placeholder="https://..." value="<?= htmlspecialchars($route['image']) ?>"><br>
+    <input type="file" name="image_file"><br><br>
 
     <label>Тривалість:</label><br>
     <input type="text" name="duration" value="<?= $route['duration'] ?? '' ?>"><br><br>

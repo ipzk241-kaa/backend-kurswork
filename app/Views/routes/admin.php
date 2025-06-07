@@ -15,7 +15,7 @@
             <td><?= htmlspecialchars($route['duration']) ?></td>
             <td>
                 <?php if ($route['image']): ?>
-                    <img src="<?= htmlspecialchars($route['image']) ?>" style="height: 50px;">
+                    <img src="/assets/routes/<?= $route['image'] ?>" width="150">
                 <?php endif; ?>
             </td>
             <td>
