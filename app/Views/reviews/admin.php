@@ -11,7 +11,7 @@
             </div>
             <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
             <?php if ($review['image']): ?>
-                <img src="/assets/reviews/<?= $review['image'] ?>" alt="зображення відгуку">
+                <img src="/assets/reviews/<?= $review['image'] ?>" alt="зображення відгуку" class="review-image">
             <?php endif; ?>
             <div class="admin-actions">
                 <?php if (!$review['approved']): ?>

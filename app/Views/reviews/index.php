@@ -50,7 +50,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <small><?= $review['created_at'] ?></small>
         <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
         <?php if (!empty($review['image'])): ?>
-            <img src="/assets/reviews/<?= htmlspecialchars($review['image']) ?>" width="150" alt="зображення відгуку"><br>
+            <img src="/assets/reviews/<?= htmlspecialchars($review['image']) ?>" width="150" alt="зображення відгуку" class="review-image"><br>
         <?php endif; ?>
         <hr>
     </div>

@@ -404,6 +404,11 @@ hr {
   gap: 0.5rem;
   flex-wrap: wrap;
 }
+.review-image {
+    max-width: 100%;
+    height: auto;
+    width: 300px;
+}
 /* === Contacts === */
 .contact-form {
     max-width: 600px;
