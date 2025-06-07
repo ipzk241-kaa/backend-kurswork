@@ -1,17 +1,25 @@
-<h2>Адмін - Відгуки</h2>
+<?php $title = 'Адмін - Відгуки'; ?>
 
-<?php foreach ($reviews as $review): ?>
-    <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-        <strong><?= htmlspecialchars($review['user_name']) ?></strong>
-        <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
-        <?php if ($review['image']): ?>
-            <img src="/assets/reviews/<?= $review['image'] ?>" width="150" alt="зображення відгуку"><br>
+<section class="container">
+    <h2>Адмін - Відгуки</h2>
+
+    <?php foreach ($reviews as $review): ?>
+        <div class="review-card admin-review">
+            <div class="review-header">
+                <strong><?= htmlspecialchars($review['user_name']) ?></strong>
+                <small><?= $review['created_at'] ?> | <?= $review['approved'] ? '✅' : '⛔' ?></small>
+            </div>
+            <p><?= nl2br(htmlspecialchars($review['text'])) ?></p>
+            <?php if ($review['image']): ?>
+                <img src="/assets/reviews/<?= $review['image'] ?>" alt="зображення відгуку">
             <?php endif; ?>
-        <small><?= $review['created_at'] ?> | <?= $review['approved'] ? '✅' : '⛔' ?></small><br>
-        <?php if (!$review['approved']): ?>
-            <a href="/reviews/approve/<?= $review['id'] ?>">✅ Схвалити</a> |
-        <?php endif; ?>
-        <a href="/reviews/edit/<?= $review['id'] ?>">✏️ Редагувати</a> |
-        <a href="/reviews/delete/<?= $review['id'] ?>" onclick="return confirm('Видалити?')">🗑️ Видалити</a>
-    </div>
-<?php endforeach; ?>
+            <div class="admin-actions">
+                <?php if (!$review['approved']): ?>
+                    <a href="/reviews/approve/<?= $review['id'] ?>" class="btn">✅ Схвалити</a>
+                <?php endif; ?>
+                <a href="/reviews/edit/<?= $review['id'] ?>" class="btn">✏️ Редагувати</a>
+                <a href="/reviews/delete/<?= $review['id'] ?>" onclick="return confirm('Видалити?')" class="btn danger">🗑️ Видалити</a>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</section>

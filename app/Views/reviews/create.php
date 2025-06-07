@@ -1,13 +1,17 @@
-<h2>Залишити відгук</h2>
+<?php $title = 'Залишити відгук'; ?>
 
-<form id="reviewForm" enctype="multipart/form-data">
-    <input type="text" name="user_name" placeholder="Ваше ім'я" required><br><br>
-    <textarea name="text" placeholder="Ваш відгук" required></textarea><br><br>
-    <input type="file" name="image" accept="image/*"><br><br>
-    <button type="submit">Надіслати</button>
-</form>
+<section class="container">
+    <h2>Залишити відгук</h2>
 
-<div id="reviewMessage" style="margin-top: 10px; font-weight: bold;"></div>
+    <form id="reviewForm" class="form" enctype="multipart/form-data">
+        <input type="text" name="user_name" placeholder="Ваше ім'я" required>
+        <textarea name="text" placeholder="Ваш відгук" required></textarea>
+        <input type="file" name="image" accept="image/*">
+        <button type="submit" class="btn">Надіслати</button>
+    </form>
+
+    <div id="reviewMessage" class="form-message"></div>
+</section>
 
 <script>
 document.getElementById('reviewForm').addEventListener('submit', async function(e) {

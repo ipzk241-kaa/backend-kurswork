@@ -1,8 +1,12 @@
-<h2>Редагувати відгук</h2>
+<?php $title = 'Редагувати відгук'; ?>
 
-<form method="POST" enctype="multipart/form-data" action="/reviews/update/<?= $review['id'] ?>">
-    <input type="text" name="user_name" value="<?= htmlspecialchars($review['user_name']) ?>" required><br><br>
-    <textarea name="text" required><?= htmlspecialchars($review['text']) ?></textarea><br><br>
-    <input type="file" name="image" accept="image/*">
-    <button type="submit">Оновити</button>
-</form>
+<section class="container">
+    <h2>Редагувати відгук</h2>
+
+    <form method="POST" class="form" enctype="multipart/form-data" action="/reviews/update/<?= $review['id'] ?>">
+        <input type="text" name="user_name" value="<?= htmlspecialchars($review['user_name']) ?>" required>
+        <textarea name="text" required><?= htmlspecialchars($review['text']) ?></textarea>
+        <input type="file" name="image" accept="image/*">
+        <button type="submit" class="btn">Оновити</button>
+    </form>
+</section>

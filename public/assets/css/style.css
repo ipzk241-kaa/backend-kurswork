@@ -1,5 +1,4 @@
-/* === Загальні стилі layout.php === */
-
+/* === Загальні стилі === */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
@@ -12,7 +11,6 @@ a {
   color: var(--link-color);
   text-decoration: none;
 }
-
 a:hover {
   text-decoration: underline;
 }
@@ -24,7 +22,6 @@ a:hover {
 }
 
 /* === Header === */
-
 .site-header {
   background-color: var(--header-bg);
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -40,22 +37,18 @@ a:hover {
   height: 60px;
 }
 
-/* Логотип */
-
 .logo a {
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--logo-color);
 }
 
-/* Навігація */
-
 .main-nav ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   gap: 25px;
+  margin: 0;
+  padding: 0;
 }
 
 .main-nav a {
@@ -66,14 +59,11 @@ a:hover {
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s ease;
 }
-
 .main-nav a:hover,
 .main-nav a:focus {
   border-bottom: 2px solid var(--nav-link-hover);
   outline: none;
 }
-
-/* Правий блок (авторизація, кнопка теми) */
 
 .header-right {
   display: flex;
@@ -81,19 +71,20 @@ a:hover {
   gap: 15px;
 }
 
-.btn-link {
+.btn-link, #theme-toggle {
   font-weight: 600;
   color: var(--btn-link-color);
-  border: none;
   background: none;
+  border: none;
   cursor: pointer;
   padding: 5px 10px;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
-
 .btn-link:hover,
-.btn-link:focus {
+.btn-link:focus,
+#theme-toggle:hover,
+#theme-toggle:focus {
   background-color: var(--btn-link-hover);
   outline: none;
   color: var(--btn-link-hover-text);
@@ -104,41 +95,20 @@ a:hover {
   color: var(--user-info-color);
 }
 
-/* Кнопка перемикання теми */
-
-#theme-toggle {
-  cursor: pointer;
-  font-size: 1.3rem;
-  background: none;
-  border: none;
-  color: var(--btn-link-color);
-  padding: 5px 8px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-#theme-toggle:hover,
-#theme-toggle:focus {
-    background-color: var(--btn-link-hover);
-    outline: none;
-    color: var(--btn-link-hover-text);
-}
 /* === Footer === */
-.site-footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60px;
-    box-shadow: 0 2px 5px rgba(0.1,0,0,0);
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  box-shadow: 0 2px 5px rgba(0.1,0,0,0);
 }
-/* Основний вміст */
 
+/* === Основний вміст === */
 main {
   padding: 20px 15px;
-  min-height: calc(100vh - 60px - 40px); /* header + hr */
+  min-height: calc(100vh - 100px);
 }
-
-/* Горизонтальна лінія */
 
 hr {
   border: none;
@@ -146,424 +116,273 @@ hr {
   margin: 0;
 }
 
-/* === Головна сторінка (home/index.php) === */
+/* === Кнопки === */
+.btn, .btn-primary, .btn-create-news, .news-form button.btn-submit {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--btn-bg, var(--accent));
+  color: var(--btn-text, #fff);
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+.btn:hover,
+.btn-primary:hover,
+.btn-create-news:hover,
+.news-form button.btn-submit:hover {
+  background-color: var(--btn-hover-bg, var(--accent-hover));
+}
+
+/* === Home Hero === */
 .home-hero {
-    text-align: center;
-    padding: 4rem 1rem;
-    background: var(--background-secondary);
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 2rem auto;
-    transition: background 0.3s;
+  text-align: center;
+  padding: 4rem 1rem;
+  background: var(--background-secondary);
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 2rem auto;
+  transition: background 0.3s;
 }
 
 .hero-title {
-    font-size: 2.5rem;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
 }
-
 .hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
 }
 
-/* Кнопка */
-.btn-primary {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--accent);
-    color: #30583e;
-    font-weight: 600;
-    border: none;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-hover);
-}
-/* === Сторінка з маршрутами Views/routes === */
 /* === Cards === */
-.route-card {
-    background-color: var(--card-bg);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    transition: background 0.3s;
+.route-card, .review-card, .news-card {
+  background-color: var(--card-bg);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.route-title {
-    margin-top: 0;
-    color: var(--text-primary);
+.route-img, .news-show-img, .preview-img {
+  max-width: 100%;
+  border-radius: 6px;
 }
 
-.route-img {
-    max-width: 100%;
-    height: auto;
-    margin: 1rem 0;
-    border-radius: 0.5rem;
+.route-desc, .news-content p {
+  color: var(--text-secondary);
 }
 
-.route-desc {
-    color: var(--text-secondary);
+/* === Tables === */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+}
+.data-table, .admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--background-secondary);
+  color: var(--text-color);
+}
+.data-table th, .data-table td,
+.admin-table th, .admin-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--hr-color);
+  text-align: left;
+}
+.data-table th {
+  background-color: var(--card-bg);
+}
+.table-img {
+  width: 100px;
+  border-radius: 4px;
 }
 
 /* === Forms === */
+.form, .news-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+}
 .form input[type="text"],
 .form input[type="number"],
 .form input[type="file"],
+.form textarea,
+.news-form input,
+.news-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--border-color, #ccc);
+  border-radius: 6px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+}
 .form textarea {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    background: var(--background-secondary);
-    color: var(--text-color);
+  resize: vertical;
+  min-height: 120px;
 }
 
-/* === Table === */
-.table-wrapper {
-    overflow-x: auto;
-    margin-top: 1rem;
+.form-message, .error {
+  font-weight: bold;
+  color: red;
 }
 
-.data-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--background-secondary);
-    color: var(--text-color);
-}
-
-.data-table th,
-.data-table td {
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--hr-color);
-    text-align: left;
-}
-
-.data-table th {
-    background-color: var(--card-bg);
-}
-/* === Сторінка з галереєю === */
-.section-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
+/* === Gallery === */
 .gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-
 .gallery-item {
-    width: 200px;
-    text-align: center;
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    background: var(--bg-light);
-    box-shadow: var(--shadow);
+  width: 200px;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--bg-light);
+  box-shadow: var(--shadow);
 }
-
 .gallery-item img {
-    max-width: 100%;
-    border-radius: 6px;
+  max-width: 100%;
+  border-radius: 6px;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-width: 400px;
-}
-
-.btn {
-    padding: 8px 16px;
-    background: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    width: fit-content;
-}
-
-.preview-img {
-    max-width: 200px;
-    border-radius: 6px;
-}
-
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.admin-table th,
-.admin-table td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-}
-
-.table-img {
-    width: 100px;
-    border-radius: 4px;
-}
-
-.error {
-    color: red;
-    font-weight: bold;
-}
-
-/*Модальне вікно для зображень*/
+/* === Lightbox === */
 .lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
-
 .lightbox-img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
-
 .lightbox .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 40px;
-    color: #fff;
-    cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
 }
-/* === Сторінка з новинами === */
-/* Контейнер списку новин */
+
+/* === News === */
 .news-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
-
-/* Окрема карточка новини */
-.news-card {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    overflow: hidden;
-    background-color: var(--bg-card);
-    color: var(--text-color);
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: box-shadow 0.3s ease;
-}
-
-.news-card:hover {
-    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
-}
-
-/* Зображення */
 .news-img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
 }
-
-/* Заглушка для відсутнього зображення */
 .news-img-placeholder {
-    width: 100%;
-    height: 250px;
-    background: var(--placeholder-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--placeholder-text);
-    font-style: italic;
+  width: 100%;
+  height: 250px;
+  background: var(--placeholder-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--placeholder-text);
+  font-style: italic;
 }
-
-/* Контент під зображенням */
-.news-content {
-    padding: 15px;
-}
-
 .news-content h3 {
-    margin: 0 0 8px 0;
-    font-size: 1.2rem;
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
 }
-
-.news-content p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.3;
-    color: var(--text-secondary);
-}
-
-/* Кнопка створення новини */
-.btn-create-news {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 8px 16px;
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 600;
-}
-.btn-create-news:hover {
-    background-color: var(--btn-hover-bg);
-}
-/* Загальні стилі для форм новин */
-.news-form input[type="text"],
-.news-form input[type="date"],
-.news-form textarea,
-.news-form input[type="file"],
-.news-form input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    background-color: var(--bg-card);
-    color: var(--text-color);
-    box-sizing: border-box;
-}
-
-.news-form label {
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.news-form button.btn-submit {
-    background-color: var(--btn-bg);
-    color: var(--btn-text);
-    border: none;
-    padding: 10px 18px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.news-form button.btn-submit:hover {
-    background-color: var(--btn-hover-bg);
-}
-
-/* Сторінка show.php */
 .news-full-content {
-    max-width: 700px;
-    margin: 0 auto;
-    color: var(--text-color);
+  max-width: 700px;
+  margin: 0 auto;
 }
-
 .news-date {
-    color: var(--text-secondary);
-    font-style: italic;
+  color: var(--text-secondary);
+  font-style: italic;
 }
-
 .news-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
 }
-
-.news-show-img {
-    max-width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.news-img-placeholder {
-    width: 100%;
-    height: 300px;
-    background: var(--placeholder-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--placeholder-text);
-    font-style: italic;
-    border-radius: 8px;
-}
-
-/* Список поточних зображень в edit.php */
 .current-images {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
-
 .current-image-item {
-    position: relative;
-    width: 200px;
-    text-align: center;
+  position: relative;
+  width: 200px;
+  text-align: center;
 }
-
 .current-image-item img {
-    max-width: 100%;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 100%;
+  border-radius: 6px;
 }
-
 .delete-link {
-    display: inline-block;
-    margin-top: 5px;
-    color: var(--btn-hover-bg);
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--btn-hover-bg);
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
 }
-
 .delete-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* === Сторінка Про нас === */
+/* === About Page === */
 .about-section h1,
 .about-section h2 {
   color: var(--text-color);
   margin-top: 1.5rem;
 }
-
 .about-section p {
   font-size: 1.1rem;
   line-height: 1.6;
   margin: 1rem 0;
 }
-
 .about-section ul {
   margin-left: 1.5rem;
   padding-left: 1rem;
 }
-
 .about-section ul li {
   margin: 0.5rem 0;
 }
-
 .about-section blockquote {
   margin: 2rem 0;
   padding-left: 1rem;
   border-left: 4px solid var(--nav-link-hover);
   font-style: italic;
   color: var(--text-color);
+}
+
+/* === Reviews === */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+.admin-review .admin-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
