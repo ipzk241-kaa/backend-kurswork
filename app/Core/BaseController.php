@@ -18,11 +18,14 @@ protected function view($view, $data = [], $cacheKey = null)
         require_once __DIR__ . '/../Views/' . $view . '.php';
         $content = ob_get_clean();
 
+        ob_start();
+        require __DIR__ . '/../Views/layout.php';
+        $fullHtml = ob_get_clean();
         if ($cacheKey) {
-            $cache->set($cacheKey, $content);
+            $cache->set($cacheKey, $fullHtml);
         }
 
-        require_once __DIR__ . '/../Views/layout.php';
+        echo $fullHtml;
     }
     protected function json($data)
     {
