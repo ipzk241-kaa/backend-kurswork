@@ -1,0 +1,24 @@
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --accent-color: #66ccff;
+  --card-bg: #1e1e1e;
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --link-color: #3399ff;
+  --nav-link-color: #cccccc;
+  --nav-link-hover: #3399ff;
+  --header-bg: #1f1f1f;
+  --logo-color: #3399ff;
+  --btn-link-color: #66aaff;
+  --btn-link-hover: #333333;
+  --btn-link-hover-text: #99ccff;
+  --user-info-color: #bbbbbb;
+  --hr-color: #444;
+  --background-primary: #121212;
+  --background-secondary: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --accent: #3399ff;
+  --accent-hover: #66b2ff;
+}

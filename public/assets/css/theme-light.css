@@ -1,0 +1,22 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --accent-color: #0066cc;
+  --card-bg: #f8f9fa;
+  --link-color: #0066cc;
+  --nav-link-color: #333333;
+  --nav-link-hover: #0066cc;
+  --header-bg: #f8f9fa;
+  --logo-color: #007bff;
+  --btn-link-color: #007bff;
+  --btn-link-hover: #e2e6ea;
+  --btn-link-hover-text: #0056b3;
+  --user-info-color: #444444;
+  --hr-color: #ddd;
+  --background-primary: #ffffff;
+  --background-secondary: #f5f7fa;
+  --text-primary: #222222;
+  --text-secondary: #555555;
+  --accent: #007bff;
+  --accent-hover: #0056b3;
+}
