@@ -1,23 +1,88 @@
-<h2>Маршрути</h2>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маршрути</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/theme-light.css" id="theme-link">
+</head>
+<body>
+<header class="site-header">
+    <div class="container header-inner">
+        <div class="logo">
+            <a href="/">TravelGuide</a>
+        </div>
 
-    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-        <h3>Теплі Карпати</h3>
-                    <img src="/assets/routes/img_6843f517ddf19.jpg" alt="" style="max-width: 300px;"><br>
-                <p>Подорож по гарячим джерелам Карпат</p>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/">Головна</a></li>
+                <li><a href="/routes">Маршрути</a></li>
+                <li><a href="/gallery">Галерея</a></li>
+                <li><a href="/news">Новини</a></li>
+                <li><a href="/about">Про нас</a></li>
+                <li><a href="/reviews">Відгуки</a></li>
+                <li><a href="/contacts">Контакти</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-right">
+            <button id="theme-toggle" aria-label="Змінити тему">🌙</button>
+
+                            <span class="user-info">
+                    Привіт, Artem                </span>
+                                    <a href="/admin" class="btn-link">Адмін-панель</a>
+                                <a href="/logout" class="btn-link">Вийти</a>
+                    </div>
+    </div>
+</header>
+
+<main class="container">
+    <h2>Маршрути</h2>
+
+    <div class="route-card">
+        <h3 class="route-title">Теплі Карпати</h3>
+                    <img src="/assets/routes/img_6843f517ddf19.jpg" alt="" class="route-img">
+                <p class="route-desc">Подорож по гарячим джерелам Карпат</p>
         <p>⏳ Тривалість: 2 дні</p>
         <p>💰 Ціна: 4000.00 грн</p>
     </div>
-    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-        <h3>Краса Житомиру</h3>
-                    <img src="/assets/routes/img_6843f8b2ee67b.jpg" alt="" style="max-width: 300px;"><br>
-                <p>Тут типу якись опис для галочки</p>
+    <div class="route-card">
+        <h3 class="route-title">Краса Житомиру</h3>
+                    <img src="/assets/routes/img_6843f8b2ee67b.jpg" alt="" class="route-img">
+                <p class="route-desc">Тут типу якись опис для галочки</p>
         <p>⏳ Тривалість: 5 годин</p>
         <p>💰 Ціна: 3000.00 грн</p>
     </div>
-    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px 0;">
-        <h3>Київ – місто контрастів</h3>
-                    <img src="/assets/routes/img_6843f8b672542.jpg" alt="" style="max-width: 300px;"><br>
-                <p>Оглядова екскурсія по столиці: Хрещатик, Софія, Лавра.</p>
+    <div class="route-card">
+        <h3 class="route-title">Київ – місто контрастів</h3>
+                    <img src="/assets/routes/img_6843f8b672542.jpg" alt="" class="route-img">
+                <p class="route-desc">Оглядова екскурсія по столиці: Хрещатик, Софія, Лавра.</p>
         <p>⏳ Тривалість: 6 годин</p>
         <p>💰 Ціна: 4000.00 грн</p>
     </div>
+</main>
+<script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeLink = document.getElementById('theme-link');
+
+    let currentTheme = localStorage.getItem('theme') || 'light';
+    themeLink.href = `/assets/css/theme-${currentTheme}.css`;
+    themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+
+    themeToggle.addEventListener('click', () => {
+        if (currentTheme === 'light') {
+            currentTheme = 'dark';
+        } else {
+            currentTheme = 'light';
+        }
+        themeLink.href = `/assets/css/theme-${currentTheme}.css`;
+        themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+        localStorage.setItem('theme', currentTheme);
+    });
+</script>
+<footer class="site-footer">
+    <p>&copy; 2025 TravelGuide. Всі права захищено, а може і нє :D.</p>
+</footer>
+</body>
+</html>
