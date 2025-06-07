@@ -60,8 +60,8 @@ $uri = $_SERVER['REQUEST_URI'];
 try {
     $router->dispatch($uri);
 } catch (Throwable $e) {
-    http_response_code(500);
-    require_once __DIR__ . '/../app/Views/errors/500.php';
+    $fallback = new \App\Controllers\HomeController();
+    $fallback->serverError();
 }
 
 ob_end_flush();

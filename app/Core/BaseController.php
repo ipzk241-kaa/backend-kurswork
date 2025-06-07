@@ -38,4 +38,15 @@ protected function view($view, $data = [], $cacheKey = null)
         $this->view('errors/403', ['title' => 'Доступ заборонено']);
         http_response_code(403);
     }
+    public function notFound()
+    {
+        http_response_code(404);
+        $this->view('errors/404', ['title' => 'Сторінку не знайдено']);
+    }
+
+    public function serverError()
+    {
+        http_response_code(500);
+        $this->view('errors/500', ['title' => 'Помилка сервера']);
+    }
 }
