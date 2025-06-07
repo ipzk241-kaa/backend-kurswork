@@ -1,9 +1,9 @@
 <h2>👨‍💼 Адмін-панель</h2>
 
-<ul>
-    <li><a href="/routes/admin">Керування маршрутами</a></li>
-    <li><a href="/gallery/admin">Керування галереєю</a></li>
-    <li><a href="/news">Керування новинами</a></li>
-    <li><a href="/reviews/admin">Керування відгуками</a></li>
-    <li><a href="/contacts/admin">Перегляд повідомлень</a></li>
-</ul>
+<div class="admin-panel">
+    <a href="/routes/admin" class="admin-card">🗺️ Маршрути</a>
+    <a href="/gallery/admin" class="admin-card">🖼️ Галерея</a>
+    <a href="/news" class="admin-card">📰 Новини</a>
+    <a href="/reviews/admin" class="admin-card">💬 Відгуки</a>
+    <a href="/contacts/admin" class="admin-card">📬 Повідомлення</a>
+</div>
