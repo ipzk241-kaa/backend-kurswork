@@ -135,7 +135,7 @@ hr {
   background-color: var(--btn-hover-bg, var(--accent-hover));
 }
 
-/* === Home Hero === */
+/* === Home === */
 .home-hero {
   text-align: center;
   padding: 4rem 1rem;
@@ -156,6 +156,24 @@ hr {
   font-size: 1.25rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
+}
+.about-section {
+  margin-top: 3rem;
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.latest-reviews {
+  margin-top: 3rem;
+}
+
+.review-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 /* === Cards === */

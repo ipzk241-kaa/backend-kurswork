@@ -2,12 +2,15 @@
 namespace App\Controllers;
 
 use App\Core\BaseController;
+use App\Models\Review;
 
 class HomeController extends BaseController
 {
     public function index()
     {
-        $this->view('home/index', ['title' => 'Головна сторінка']);
+        $reviewModel = new Review();
+        $reviews = $reviewModel->getApproved();
+        $this->view('home/index', ['title' => 'Головна сторінка', 'reviews' => $reviews]);
     }
     public function about()
     {
