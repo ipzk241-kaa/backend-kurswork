@@ -1,6 +1,6 @@
 <h2 class="section-title"><?= $title ?></h2>
 
-<?php $initialImages = array_slice($images, 0, 12); ?>
+<?php $initialImages = array_slice($images, 0, 10); ?>
 <div class="gallery-grid" id="gallery-container">
     <?php foreach ($initialImages as $img): ?>
         <div class="gallery-item">
@@ -11,7 +11,7 @@
         </div>
     <?php endforeach; ?>
 </div>
-<button class="btn" id="load-more" data-offset="12">Завантажити ще</button>
+<button class="btn" id="load-more" data-offset="10">Завантажити ще</button>
 <!-- Lightbox HTML -->
 <div id="lightbox" class="lightbox">
     <span class="close" onclick="closeLightbox()">×</span>

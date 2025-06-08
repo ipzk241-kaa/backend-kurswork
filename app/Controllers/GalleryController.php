@@ -4,14 +4,14 @@ namespace App\Controllers;
 use App\Core\BaseController;
 use App\Models\Gallery;
 use App\Core\Auth;
-
+use App\Core\Cache;
 class GalleryController extends BaseController
 {
     private function clearGalleryCaches()
     {
-        $cache = new \App\Core\Cache();
+        $cache = new Cache();
+        $cache->delete('gallery_admin_page');
         $cache->delete('gallery_index_page');
-        $cache->delete('gallary_admin_page');
     }
     public function index()
     {
@@ -34,7 +34,7 @@ class GalleryController extends BaseController
         if (!Auth::isAdmin()) {
             return $this->forbidden();
         }
-
+        $this->clearGalleryCaches();
         $this->view('gallery/create', ['title' => 'Додати зображення']);
     }
 
@@ -68,16 +68,15 @@ class GalleryController extends BaseController
                     $imagePath = $uniqueName;
                 }
             }
-
+            $this->clearGalleryCaches();
             if ($imagePath) {
+                $this->clearGalleryCaches();
                 $model = new Gallery();
                 $model->create($title, $imagePath);
                 header('Location: /gallery/admin');
-                $this->clearGalleryCaches();
                 exit;
             }
         }
-        $this->clearGalleryCaches();
         $this->view('gallery/create', ['title' => 'Додати зображення', 'error' => 'Помилка під час завантаження']);
         header("Location: /gallery/admin");
     }
@@ -86,7 +85,7 @@ class GalleryController extends BaseController
         if (!Auth::isAdmin()) {
             return $this->forbidden();
         }
-
+        $this->clearGalleryCaches();
         $model = new Gallery();
         $item = $model->find($id);
         $this->view('gallery/edit', ['title' => 'Редагування зображення', 'item' => $item]);

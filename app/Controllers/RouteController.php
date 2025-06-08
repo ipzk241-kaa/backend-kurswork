@@ -4,11 +4,12 @@ namespace App\Controllers;
 use App\Core\BaseController;
 use App\Core\Auth;
 use App\Models\Route;
+use App\Core\Cache;
 
 class RouteController extends BaseController
 {
     private function clearRouteCaches(){
-        $cache = new \App\Core\Cache();
+        $cache = new Cache();
         $cache->delete('routes_index_page');
         $cache->delete('routes_admin_page');
     }
