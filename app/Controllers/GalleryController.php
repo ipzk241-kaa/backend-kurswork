@@ -73,6 +73,7 @@ class GalleryController extends BaseController
                 $model = new Gallery();
                 $model->create($title, $imagePath);
                 header('Location: /gallery/admin');
+                $this->clearGalleryCaches();
                 exit;
             }
         }
