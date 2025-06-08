@@ -30,6 +30,7 @@ $router->add('gallery/store', 'GalleryController', 'store');
 $router->add('gallery/edit/{id}', 'GalleryController', 'edit');
 $router->add('gallery/update/{id}', 'GalleryController', 'update');
 $router->add('gallery/delete/{id}', 'GalleryController', 'delete');
+$router->add("gallery/load-more","GalleryController","loadMore");
 
 $router->add('reviews', 'ReviewController', 'index');
 $router->add('reviews/create', 'ReviewController', 'create');

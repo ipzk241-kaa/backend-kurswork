@@ -72,7 +72,7 @@ class GalleryController extends BaseController
             if ($imagePath) {
                 $model = new Gallery();
                 $model->create($title, $imagePath);
-                header('Location: /gallery');
+                header('Location: /gallery/admin');
                 exit;
             }
         }
@@ -92,45 +92,45 @@ class GalleryController extends BaseController
     }
 
     public function update($id){
-    if (!Auth::isAdmin()) {
-        return $this->forbidden();
-    }
-
-    $model = new Gallery();
-    $item = $model->find($id);
-    $title = $_POST['title'] ?? $item['title'];
-    $imagePath = $item['image_path'];
-
-    if (!empty($_POST['image_url'])) {
-        $ext = pathinfo(parse_url($_POST['image_url'], PHP_URL_PATH), PATHINFO_EXTENSION);
-        $uniqueName = uniqid('img_') . '.' . $ext;
-        $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
-
-        if (@copy($_POST['image_url'], $targetPath)) {
-            if (file_exists("public/assets/img/" . $imagePath)) {
-                unlink("public/assets/img/" . $imagePath);
-            }
-            $imagePath = $uniqueName;
+        if (!Auth::isAdmin()) {
+            return $this->forbidden();
         }
-    }
 
-    if (!empty($_FILES['image_file']['name'])) {
-        $ext = pathinfo($_FILES['image_file']['name'], PATHINFO_EXTENSION);
-        $uniqueName = uniqid('img_') . '.' . $ext;
-        $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
+        $model = new Gallery();
+        $item = $model->find($id);
+        $title = $_POST['title'] ?? $item['title'];
+        $imagePath = $item['image_path'];
 
-        if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetPath)) {
-            if (file_exists("public/assets/img/" . $imagePath)) {
-                unlink("public/assets/img/" . $imagePath);
+        if (!empty($_POST['image_url'])) {
+            $ext = pathinfo(parse_url($_POST['image_url'], PHP_URL_PATH), PATHINFO_EXTENSION);
+            $uniqueName = uniqid('img_') . '.' . $ext;
+            $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
+
+            if (@copy($_POST['image_url'], $targetPath)) {
+                if (file_exists("public/assets/img/" . $imagePath)) {
+                    unlink("public/assets/img/" . $imagePath);
+                }
+                $imagePath = $uniqueName;
             }
-            $imagePath = $uniqueName;
         }
-    }
 
-    $model->update($id, $title, $imagePath);
-    $this->clearGalleryCaches();
-    header("Location: /gallery/admin");
-}
+        if (!empty($_FILES['image_file']['name'])) {
+            $ext = pathinfo($_FILES['image_file']['name'], PATHINFO_EXTENSION);
+            $uniqueName = uniqid('img_') . '.' . $ext;
+            $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/assets/img/' . $uniqueName;
+
+            if (move_uploaded_file($_FILES['image_file']['tmp_name'], $targetPath)) {
+                if (file_exists("public/assets/img/" . $imagePath)) {
+                    unlink("public/assets/img/" . $imagePath);
+                }
+                $imagePath = $uniqueName;
+            }
+        }
+
+        $model->update($id, $title, $imagePath);
+        $this->clearGalleryCaches();
+        header("Location: /gallery/admin");
+    }
     public function delete($id)
     {
         if (!Auth::isAdmin()) {
@@ -146,5 +146,17 @@ class GalleryController extends BaseController
         $model->delete($id);
         $this->clearGalleryCaches();
         header('Location: /gallery/admin');
+    }
+    public function loadMore()
+    {
+        $limit = 12;
+        $offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
+
+        $model = new \App\Models\Gallery();
+        $images = $model->getPaginated($limit, $offset);
+
+        header('Content-Type: application/json');
+        echo json_encode($images);
+        exit;
     }
 }

@@ -34,4 +34,13 @@ class Gallery extends Model
         $stmt = $this->db->prepare("DELETE FROM gallery WHERE id = ?");
         $stmt->execute([$id]);
     }
+    public function getPaginated($limit, $offset)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM gallery ORDER BY created_at DESC LIMIT ? OFFSET ?");
+        $stmt->bindValue(1, (int)$limit, \PDO::PARAM_INT);
+        $stmt->bindValue(2, (int)$offset, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 }
